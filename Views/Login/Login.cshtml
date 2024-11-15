@@ -1,0 +1,32 @@
+﻿@model Group_Project_Chat_app.Models.User
+<h2>Login</h2>
+<form id="loginForm">
+	<label>Username:</label>
+	<input type="text" id="username" required />
+	<br />
+	<label>Password:</label>
+	<input type="password" id="password_plaintext" required />
+	<br />
+	<button type="button" onclick="login()">Login</button>
+</form>
+<script>
+	async function login() {
+		const username = document.getElementById("username").value;
+		const password = document.getElementById("password_plaintext").value;
+		// Todo: Encrypt password before sending it over the network
+		const response = await fetch("/api/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({ username, password })
+		});
+		if (response.ok) {
+			const data = await response.json();
+			localStorage.setItem("token", data.Token);
+			alert("Login successful! Token stored.");
+		} else {
+			alert("Login failed!");
+		}
+	}
+</script>
