@@ -9,6 +9,7 @@ using System.Security.Principal;
 using Group_Project_Chat_app.Data;
 using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace Group_Project_Chat_app.Controllers
 {
@@ -27,9 +28,15 @@ namespace Group_Project_Chat_app.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
-            return Ok("Placeholder function");
+            if (ModelState.IsValid)
+            {
+                _appDbContext.Users.Add(user);
+                await _appDbContext.SaveChangesAsync();
+                return Login(user);
+            }
+            return BadRequest();
         }
 
         [HttpPost("login")]
