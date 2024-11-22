@@ -13,7 +13,7 @@ namespace Group_Project_Chat_app.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().HasData(
-                new User { Username = "Admin", Password = "TeamProcrastination",Role="Admin"}
+                new User { Username = "Admin", Password = "TeamProcrastination",Role=["User","Admin"]}
                 );
         }
     }

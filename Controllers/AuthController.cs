@@ -10,6 +10,7 @@ using Group_Project_Chat_app.Data;
 using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
+using NuGet.Protocol;
 
 namespace Group_Project_Chat_app.Controllers
 {
@@ -51,7 +52,8 @@ namespace Group_Project_Chat_app.Controllers
                 {
                     Subject = new ClaimsIdentity(new[]
                     {
-                        new Claim(ClaimTypes.Name,user.Username)
+                        new Claim(ClaimTypes.Name,user.Username),
+                        new Claim("Roles",user.Role.ToJson())
                     }),
                     Expires = DateTime.UtcNow.AddMinutes(30),
                     Issuer = _configuration["Jwt:Issuer"],
