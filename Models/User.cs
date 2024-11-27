@@ -14,6 +14,6 @@ namespace Group_Project_Chat_app.Models
         [Required(ErrorMessage ="A password is required")]
         public required string Password { get; set; }
 
-        public required List<string> Role { get; set; } = new List<string> { "User" };
+        public List<string>? Role { get; set; } = new List<string> { "User" };
     }
 }

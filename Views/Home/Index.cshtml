@@ -18,12 +18,10 @@
             document.getElementById("helpful_paragraph").innerHTML = "Procede to your chat room of choice"
         } else {
             document.getElementById("should_log_in").innerHTML = "Hello, please log in:"
-            document.getElementById("helpful_paragraph").innerHTML = '@{<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>}'
-
         }
     }
 </script>
 <div class="text-center">
     <h1 class="display-4" id="should_log_in">Welcome</h1>
-    <p id="helpful_paragraph"></p>
+    <p id="helpful_paragraph"><a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a> or <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Register">Register</a></p>
 </div>
