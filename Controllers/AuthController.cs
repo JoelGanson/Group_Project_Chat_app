@@ -28,16 +28,32 @@ namespace Group_Project_Chat_app.Controllers
             _appDbContext = appDbContext;
         }
 
+        //[HttpPost("register")]
+        //public async Task<IActionResult> Register([FromBody] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _appDbContext.Users.Add(user);
+        //        await _appDbContext.SaveChangesAsync();
+        //        return Login(user);
+        //    }
+        //    return BadRequest();
+        //}
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] string username, [FromBody] string password)
         {
-            if (ModelState.IsValid)
+            try
             {
+                var user = new User(username,
+                                    password,
+                                    new List<string> { "User" });
                 _appDbContext.Users.Add(user);
                 await _appDbContext.SaveChangesAsync();
                 return Login(user);
             }
-            return BadRequest();
+            catch(Exception e){
+                return BadRequest();
+            }
         }
 
         [HttpPost("login")]

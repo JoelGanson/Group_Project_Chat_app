@@ -6,6 +6,13 @@ namespace Group_Project_Chat_app.Models
 {
     public class User
     {
+        public User(string username, string password, List<string> role)
+        {
+            Username = username;
+            Password = password;
+            Role = role;
+        }
+
         [Key] // Set as primary Key
         [DatabaseGenerated(DatabaseGeneratedOption.None)] // Disable autoincriment, allowing for String to be used
         [StringLength(24,ErrorMessage="Username cannot be longer than 24 characters")] // Limit username size
@@ -14,6 +21,6 @@ namespace Group_Project_Chat_app.Models
         [Required(ErrorMessage ="A password is required")]
         public required string Password { get; set; }
 
-        public required List<string> Role { get; set; } = ["User"];
+        public required List<string> Role { get; set; } = new List<string> { "User" };
     }
 }

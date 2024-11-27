@@ -10,7 +10,7 @@
     <script>
         async function on_layout()
         {
-            console.log("Attempting to add login/logout button")
+            // console.log("Attempting to add login/logout button")
             const token = localStorage.getItem("token");
             const response = await fetch("/api/auth/protected", {
                 method: "GET",
