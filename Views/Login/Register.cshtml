@@ -28,7 +28,7 @@
 			});
 			if (response.ok) {
 				const data = await response.json();
-				localStorage.setItem("token", data.Token);
+				localStorage.setItem("token", data.token);
 				alert("account successfully created! Token stored.");
 			} else {
 				alert("Failed to create account!");
