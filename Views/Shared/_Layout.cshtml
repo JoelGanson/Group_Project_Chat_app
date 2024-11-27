@@ -7,8 +7,32 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Group_Project_Chat_app.styles.css" asp-append-version="true" />
+    <script>
+        async function on_layout()
+        {
+            // console.log("Attempting to add login/logout button")
+            const token = localStorage.getItem("token");
+            const response = await fetch("/api/auth/protected", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                document.getElementById("loginout").innerHTML = '<button class="nav-link text-dark" action="logout()">Log out</button>'
+                document.getElementById("register").innerHTML = '<div/>'
+            } else {
+                document.getElementById("loginout").innerHTML = '@{<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>}'
+                document.getElementById("register").innerHTML = '@{<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Register">Register</a>}'
+            }
+        }
+        function logout() {
+            localStorage.removeItem('token')
+        }
+    </script>
 </head>
-<body>
+
+<body onload="on_layout()">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -22,6 +46,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item" id="loginout">
+                           
+                        </li>
+                        <li class="nav-item" id="register">
+
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -35,6 +66,7 @@
             @RenderBody()
         </main>
     </div>
+    
 
     <footer class="border-top footer text-muted">
         <div class="container">
