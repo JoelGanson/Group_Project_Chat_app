@@ -1,0 +1,40 @@
+﻿@model Group_Project_Chat_app.Models.User
+<h2>Register</h2>
+<form id="loginForm">
+	<label>Username:</label>
+	<input type="text" id="username" required />
+	<br />
+	<label>Password:</label>
+	<input type="password" id="password" required />
+	<br />
+	<label>Repeat Password:</label>
+	<input type="password" id="password_r" required />
+	<br />
+
+	<button type="button" onclick="register()">register</button>
+</form>
+<script>
+	async function register() {
+		const username = document.getElementById("username").value;
+		const password = document.getElementById("password").value;
+		const password_r = document.getElementById("password_r").value;
+		if (password == password_r) {
+			const response = await fetch("/api/auth/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ username, password })
+			});
+			if (response.ok) {
+				const data = await response.json();
+				localStorage.setItem("token", data.token);
+				alert("account successfully created! Token stored.");
+			} else {
+				alert("Failed to create account!");
+			}
+		} else {
+			alert("Repeated password must be the same as first password!")
+		}
+	}
+</script>
