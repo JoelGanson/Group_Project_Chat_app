@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+<a href="@Url.Action("Index", "Chat")">Go to Chat</a>
 }
 <script>
     function parseJwt (token) {
@@ -30,6 +32,7 @@
             document.getElementById("should_log_in").innerHTML = "Hello, please log in:"
         }
     }
+
 </script>
 <div class="text-center">
     <h1 class="display-4" id="should_log_in">Welcome</h1>
